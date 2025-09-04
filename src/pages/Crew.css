@@ -1,0 +1,187 @@
+/* src/pages/Crew.css */
+
+.grid-container--crew {
+  grid-template-areas:
+    "title"
+    "image"
+    "dots"
+    "content";
+  padding-bottom: 0; /* Full height image on mobile */
+  justify-items: center;
+  text-align: center;
+  align-content: end; /* Align content to the bottom of the grid */
+}
+
+.numbered-title {
+  grid-area: title;
+  justify-self: center; /* Center on mobile */
+  margin-top: 1.5rem; /* Space from header */
+}
+
+.crew-image-container {
+  grid-area: image;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid hsl(231, 15%, 26%); /* Separator line */
+  max-height: 223px; /* Mobile image max height */
+  overflow: hidden; /* Hide overflowing parts of image */
+}
+
+.crew-image {
+  max-width: 100%; /* Ensure image fits container */
+  height: 100%;
+  object-fit: contain; /* Maintain aspect ratio and fit within container */
+  padding-top: 1rem; /* Adjust image position */
+}
+
+.dot-indicators {
+  --gap: 1rem;
+  grid-area: dots;
+  justify-content: center;
+  margin-block: 2rem; /* Space above and below dots */
+}
+
+.dot-indicators button {
+  border: 0;
+  border-radius: 50%;
+  padding: 0.5em; /* Size of the dot */
+  background-color: hsl(231, 15%, 26%); /* Inactive dot color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot-indicators button.active {
+  background-color: var(--clr-white); /* Active dot color */
+}
+
+.dot-indicators button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Hover effect */
+}
+
+.crew-info {
+  grid-area: content;
+  margin-bottom: 4rem; /* Space from bottom of page */
+}
+
+.crew-info .role {
+  color: var(--clr-white);
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+}
+
+.crew-info .name {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.crew-info .bio {
+  line-height: 1.8;
+  max-width: 50ch;
+  margin-inline: auto; /* Center bio text */
+}
+
+/* Tablet Layout */
+@media (min-width: 35em) {
+  .grid-container--crew {
+    grid-template-areas:
+      "title"
+      "content"
+      "dots"
+      "image"; /* Image at the bottom on tablet */
+    grid-template-rows: auto 1fr auto auto; /* Distribute space */
+    padding-bottom: 0;
+  }
+
+  .numbered-title {
+    justify-self: start;
+    margin-left: 2.375rem; /* Align with design */
+  }
+
+  .crew-image-container {
+    border-bottom: none; /* No separator line on tablet */
+    max-height: unset; /* Allow image to grow */
+    height: 100%; /* Take up available vertical space */
+    margin-top: 2rem;
+  }
+
+  .crew-image {
+    max-height: 530px; /* Tablet image max height */
+    width: auto; /* Adjust width naturally */
+  }
+
+  .dot-indicators {
+    order: -1; /* Move dots above content for tablet */
+    margin-block: 3.5rem;
+  }
+
+  .crew-info {
+    margin-bottom: 0; /* Reset margin, layout handles spacing */
+    padding-inline: 4rem; /* Add horizontal padding */
+  }
+
+  .crew-info .name {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Desktop Layout */
+@media (min-width: 45em) {
+  .grid-container--crew {
+    grid-template-areas:
+      ". title image ."
+      ". content image ."
+      ". dots image .";
+    grid-template-columns: minmax(1rem, 1fr) minmax(0, 37.5rem) minmax(0, 31rem) minmax(1rem, 1fr); /* Specific 4-column layout */
+    grid-template-rows: auto minmax(0, 1fr) auto; /* Rows for title, content, dots */
+    text-align: left;
+    height: 100vh;
+    padding-bottom: 0;
+    justify-items: start;
+  }
+
+  .numbered-title {
+    margin-top: 3.5rem;
+    align-self: end; /* Align to the bottom of its row */
+    margin-left: unset; /* Reset margin */
+  }
+
+  .crew-image-container {
+    max-height: unset;
+    height: auto;
+    width: auto;
+    align-self: end; /* Align to bottom of its row */
+  }
+
+  .crew-image {
+    max-height: 650px; /* Desktop image max height */
+    padding-top: 0;
+  }
+
+  .dot-indicators {
+    justify-content: start; /* Align dots to the left */
+    margin-block: 6rem; /* Adjust vertical spacing */
+    --gap: 1.5rem;
+  }
+
+  .crew-info {
+    padding-inline: 0;
+    max-width: 37.5rem; /* Limit width of text content */
+  }
+
+  .crew-info .role {
+    font-size: var(--fs-500);
+  }
+
+  .crew-info .name {
+    font-size: var(--fs-700);
+    margin-bottom: 1.5rem;
+  }
+
+  .crew-info .bio {
+    font-size: var(--fs-400);
+    margin-inline: 0; /* Remove auto margin for left alignment */
+  }
+}

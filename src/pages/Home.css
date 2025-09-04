@@ -1,0 +1,108 @@
+/* src/pages/Home.css */
+
+.home-page {
+  display: grid;
+  text-align: center;
+  /* padding-block-end: 5rem; Removed, now handled by grid-container padding-bottom */
+  align-content: end; /* Align content to the bottom of the grid area */
+  justify-items: center; /* Center items horizontally within the grid area */
+}
+
+/* Remove direct margin-inline: auto from children if using place-items: center or justify-items: center */
+/* .home-page > *:not(.explore-button) {
+  margin-inline: auto;
+} */
+
+.home-content h1 span {
+  display: block; /* Ensure 'Space' is on its own line */
+  margin-top: 1rem; /* Space between 'travel to' and 'Space' */
+  margin-bottom: 2rem;
+}
+
+.home-content p {
+  max-width: 50ch; /* Optimal line length for readability */
+  margin-inline: auto; /* Center paragraph for smaller screens */
+  line-height: 1.5;
+}
+
+.explore-button {
+  margin-top: 5rem; /* Space between text and button */
+}
+
+.large-button {
+  font-size: 2rem; /* Large button text */
+  position: relative;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 1.75em; /* Use em units for padding to scale with font-size */
+  border-radius: 50%;
+  aspect-ratio: 1; /* Make it a perfect circle */
+  text-decoration: none; /* Remove underline */
+  color: var(--clr-dark);
+  background-color: var(--clr-white);
+  transition: all 0.3s ease;
+}
+
+.large-button::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-white);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 500ms linear, transform 750ms ease-in-out;
+}
+
+.large-button:hover::after,
+.large-button:focus::after {
+  opacity: 0.1; /* Slight opacity for hover effect */
+  transform: scale(1.5);
+}
+
+
+/* Media Queries for Responsive Design for Home Page */
+
+@media (min-width: 35em) { /* Tablet */
+  .home-page {
+    /* Adjust padding/margins for tablet if needed, but often global grid-container handles this */
+    padding-block-start: 6.25rem; /* Add specific top padding for home page */
+  }
+  .home-content p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 45em) { /* Desktop */
+  .home-page {
+    grid-area: title; /* Assign to the 'title' grid area defined in App.css grid-container */
+    align-content: end; /* Align content to the bottom of its grid area */
+    text-align: left;
+  }
+
+  .home-content {
+    margin-inline: 0; /* Remove auto margin for desktop grid layout */
+  }
+
+  .home-content h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .explore-button {
+    grid-area: button; /* Assign to the 'button' grid area defined in App.css grid-container */
+    margin-top: 0; /* Remove top margin, handled by grid alignment */
+    align-self: end; /* Align button to the bottom of its grid area */
+    justify-self: end; /* Align button to the right of its grid area */
+  }
+
+  .home-content p {
+    margin-inline: 0; /* Ensure paragraph aligns left */
+    font-size: var(--fs-400); /* Revert to default or specific desktop size */
+  }
+
+  .large-button {
+    font-size: 2rem;
+  }
+}

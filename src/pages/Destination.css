@@ -1,0 +1,164 @@
+/* src/pages/Destination.css */
+
+.grid-container--destination {
+  padding-bottom: 4rem; /* Adjust general padding for the page */
+}
+
+.numbered-title {
+  justify-self: center; /* Center for mobile */
+}
+
+.destination-image {
+  max-width: 170px; /* Mobile image size */
+  margin-block: 2rem; /* Spacing for mobile */
+  justify-self: center;
+}
+
+.tab-list {
+  --gap: 1.5rem; /* Space between tabs */
+  order: 1; /* Order for mobile layout */
+  justify-content: center; /* Center tabs for mobile */
+}
+
+.tab-list button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-size: var(--fs-300);
+  color: var(--clr-light);
+  letter-spacing: var(--letter-spacing-2);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-list button:hover {
+  border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+  color: var(--clr-white);
+}
+
+.tab-list button.active {
+  border-bottom: 3px solid var(--clr-white);
+  color: var(--clr-white);
+}
+
+.destination-info {
+  text-align: center; /* Center text for mobile */
+  border-bottom: 1px solid hsl(231, 15%, 26%); /* Separator line */
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.destination-info h3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.destination-info p {
+  line-height: 1.8;
+  max-width: 50ch;
+  margin-inline: auto; /* Center description for mobile */
+}
+
+.destination-meta {
+  flex-direction: column; /* Stack for mobile */
+  gap: 2rem; /* Space between distance and travel time */
+  margin-top: 2rem;
+}
+
+.destination-meta h4 {
+  color: var(--clr-light);
+  font-size: var(--fs-200);
+}
+
+.destination-meta p {
+  font-size: var(--fs-500);
+  color: var(--clr-white);
+}
+
+
+/* Tablet Layout */
+@media (min-width: 35em) {
+  .numbered-title {
+    justify-self: start;
+    margin-left: 2.375rem; /* Align with design */
+  }
+
+  .destination-image {
+    max-width: 300px;
+    margin-block-start: 3.75rem; /* Adjust spacing */
+  }
+
+  .tab-list {
+    --gap: 2.25rem;
+    order: unset; /* Revert order */
+  }
+
+  .destination-info h3 {
+    margin-top: 2rem;
+  }
+
+  .destination-meta {
+    flex-direction: row; /* Side-by-side for tablet */
+    justify-content: space-around; /* Distribute items */
+  }
+}
+
+/* Desktop Layout */
+@media (min-width: 45em) {
+  .grid-container--destination {
+    grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(1rem, 1fr);
+    grid-template-areas:
+      ". title title ."
+      ". image tabs-and-info ."
+      / 1fr minmax(0, 30rem) minmax(0, 30rem) 1fr;
+    justify-items: start; /* Align content to start of their areas */
+    text-align: left;
+    height: 100vh;
+    padding-bottom: 0;
+  }
+
+  .numbered-title {
+    grid-area: title;
+    justify-self: start;
+    align-self: end;
+    margin-left: 10.5%; /* Match design alignment */
+  }
+
+  .destination-image {
+    grid-area: image;
+    max-width: 445px; /* Desktop image size */
+    margin-block-start: 6rem;
+    margin-inline: 0;
+    justify-self: center; /* Center within its grid area */
+  }
+
+  .tab-list {
+    grid-area: tabs-and-info; /* Place tabs with info section */
+    justify-self: start;
+    justify-content: start; /* Align tabs to the start */
+    --gap: 2.25rem;
+    margin-top: 5rem;
+  }
+
+  .destination-info {
+    grid-area: tabs-and-info; /* Place info with tabs section */
+    text-align: left;
+    padding-left: 1rem; /* Adjust as needed for alignment */
+    border-bottom: 0; /* No border on desktop */
+    padding-bottom: 0;
+    margin-bottom: 0;
+    align-self: start; /* Align to the top of its grid area */
+    margin-top: 10.5rem; /* Adjust top margin to align with image */
+  }
+
+  .destination-info p {
+    margin-inline: 0; /* Remove auto margin */
+    font-size: var(--fs-400); /* Ensure correct font size */
+  }
+
+  .destination-meta {
+    justify-content: start; /* Align items to the start */
+    gap: 5rem; /* More space between items */
+    margin-top: 3.5rem;
+  }
+}
