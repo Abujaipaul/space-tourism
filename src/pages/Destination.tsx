@@ -1,7 +1,23 @@
-// src/pages/Destination.tsx
+
 import React, { useState, useEffect } from 'react';
-import data from '../data/data.json'; // Import data from local JSON
-import './Destination.css'; // Destination-specific styles
+import data from '../data/data.json';
+import './Destination.css';
+
+// Helper function to dynamically import images for destinations
+// This tells Vite to process these images and provide a URL
+const getDestinationImageSrc = (imageFileName: string, type: 'png' | 'webp') => {
+  try {
+    // Vite's import.meta.glob is powerful for dynamic imports
+    // It will return an object like {'./image-moon.png': () => import('/src/assets/destination/image-moon.png')}
+    const images = import.meta.glob('../assets/destination/*.{png,webp}', { eager: true, as: 'url' });
+    const fullPath = `../assets/destination/${imageFileName}`;
+    return images[fullPath] || ''; // Return the URL or empty string if not found
+  } catch (error) {
+    console.error(`Failed to load destination image ${imageFileName}:`, error);
+    return '';
+  }
+};
+
 
 const DestinationPage: React.FC = () => {
   const [selectedDestinationIndex, setSelectedDestinationIndex] = useState(0);
@@ -16,6 +32,11 @@ const DestinationPage: React.FC = () => {
     };
   }, []);
 
+  // Dynamically get image URLs
+  const pngSrc = getDestinationImageSrc(currentDestination.images.png, 'png');
+  const webpSrc = getDestinationImageSrc(currentDestination.images.webp, 'webp');
+
+
   return (
     <section className="destination-page flow grid-container--destination">
       <h2 className="numbered-title fs-500 ff-sans-cond uppercase text-white">
@@ -23,8 +44,8 @@ const DestinationPage: React.FC = () => {
       </h2>
 
       <picture className="destination-image">
-        <source srcSet={currentDestination.images.webp} type="image/webp" />
-        <img src={currentDestination.images.png} alt={currentDestination.name} />
+        <source srcSet={webpSrc} type="image/webp" />
+        <img src={pngSrc} alt={currentDestination.name} />
       </picture>
 
       <div className="tab-list underline-indicators flex ff-sans-cond text-light" role="tablist" aria-label="destination list">

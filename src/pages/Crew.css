@@ -1,4 +1,3 @@
-/* src/pages/Crew.css */
 
 .grid-container--crew {
   grid-template-areas:
@@ -6,16 +5,19 @@
     "image"
     "dots"
     "content";
-  padding-bottom: 0; /* Full height image on mobile */
+  padding-bottom: 0; 
   justify-items: center;
   text-align: center;
-  align-content: end; /* Align content to the bottom of the grid */
+  align-content: end; 
+  row-gap: 2rem;
+  padding-inline: 1.5rem; 
 }
 
 .numbered-title {
   grid-area: title;
-  justify-self: center; /* Center on mobile */
-  margin-top: 1.5rem; /* Space from header */
+  justify-self: center;
+  margin-top: 1.5rem;
+  width: 100%; /* Take full width for centering */
 }
 
 .crew-image-container {
@@ -25,45 +27,51 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-bottom: 1px solid hsl(231, 15%, 26%); /* Separator line */
-  max-height: 223px; /* Mobile image max height */
-  overflow: hidden; /* Hide overflowing parts of image */
+  border-bottom: 1px solid hsl(231, 15%, 26%); 
+  max-height: 223px; 
+  overflow: hidden; 
+  padding-bottom: 1.5rem; 
+  margin-inline: auto; 
+  max-width: 327px; 
 }
 
 .crew-image {
-  max-width: 100%; /* Ensure image fits container */
+  max-width: 100%;
   height: 100%;
-  object-fit: contain; /* Maintain aspect ratio and fit within container */
-  padding-top: 1rem; /* Adjust image position */
+  object-fit: contain; 
+  padding-top: 1rem; 
 }
 
 .dot-indicators {
   --gap: 1rem;
   grid-area: dots;
   justify-content: center;
-  margin-block: 2rem; /* Space above and below dots */
+  margin-block: 2rem;
 }
 
 .dot-indicators button {
   border: 0;
   border-radius: 50%;
-  padding: 0.5em; /* Size of the dot */
-  background-color: hsl(231, 15%, 26%); /* Inactive dot color */
+  padding: 0.5em;
+  background-color: hsl(231, 15%, 26%);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .dot-indicators button.active {
-  background-color: var(--clr-white); /* Active dot color */
+  background-color: var(--clr-white);
 }
 
 .dot-indicators button:hover {
-  background-color: rgba(255, 255, 255, 0.5); /* Hover effect */
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .crew-info {
   grid-area: content;
-  margin-bottom: 4rem; /* Space from bottom of page */
+  margin-bottom: 4rem;
+  width: 100%; 
+  max-width: 50ch; 
+  margin-inline: auto;
 }
 
 .crew-info .role {
@@ -80,7 +88,7 @@
 .crew-info .bio {
   line-height: 1.8;
   max-width: 50ch;
-  margin-inline: auto; /* Center bio text */
+  margin-inline: auto;
 }
 
 /* Tablet Layout */
@@ -90,36 +98,39 @@
       "title"
       "content"
       "dots"
-      "image"; /* Image at the bottom on tablet */
-    grid-template-rows: auto 1fr auto auto; /* Distribute space */
-    padding-bottom: 0;
+      "image";
+    grid-template-rows: auto 1fr auto auto;
+    padding-bottom: 0; 
+    padding-inline: 1.5rem; 
   }
 
   .numbered-title {
     justify-self: start;
-    margin-left: 2.375rem; /* Align with design */
+    margin-left: 2.375rem;
   }
 
   .crew-image-container {
-    border-bottom: none; /* No separator line on tablet */
-    max-height: unset; /* Allow image to grow */
-    height: 100%; /* Take up available vertical space */
+    border-bottom: none;
+    max-height: unset; 
+    height: 100%;
     margin-top: 2rem;
+    padding-bottom: 0;
+    max-width: 530px; 
   }
 
   .crew-image {
-    max-height: 530px; /* Tablet image max height */
-    width: auto; /* Adjust width naturally */
+    max-height: 530px;
+    width: auto;
   }
 
   .dot-indicators {
-    order: -1; /* Move dots above content for tablet */
+    order: -1;
     margin-block: 3.5rem;
   }
 
   .crew-info {
-    margin-bottom: 0; /* Reset margin, layout handles spacing */
-    padding-inline: 4rem; /* Add horizontal padding */
+    margin-bottom: 0; 
+    padding-inline: 4rem;
   }
 
   .crew-info .name {
@@ -134,41 +145,43 @@
       ". title image ."
       ". content image ."
       ". dots image .";
-    grid-template-columns: minmax(1rem, 1fr) minmax(0, 37.5rem) minmax(0, 31rem) minmax(1rem, 1fr); /* Specific 4-column layout */
-    grid-template-rows: auto minmax(0, 1fr) auto; /* Rows for title, content, dots */
+    grid-template-columns: minmax(1rem, 1fr) minmax(0, 37.5rem) minmax(0, 31rem) minmax(1rem, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
     text-align: left;
     height: 100vh;
     padding-bottom: 0;
     justify-items: start;
+    padding-inline: 1.5rem;
   }
 
   .numbered-title {
     margin-top: 3.5rem;
-    align-self: end; /* Align to the bottom of its row */
-    margin-left: unset; /* Reset margin */
+    align-self: end;
+    margin-left: unset;
   }
 
   .crew-image-container {
     max-height: unset;
     height: auto;
     width: auto;
-    align-self: end; /* Align to bottom of its row */
+    align-self: end;
+    max-width: unset; /* No max-width on desktop */
   }
 
   .crew-image {
-    max-height: 650px; /* Desktop image max height */
+    max-height: 650px;
     padding-top: 0;
   }
 
   .dot-indicators {
-    justify-content: start; /* Align dots to the left */
-    margin-block: 6rem; /* Adjust vertical spacing */
+    justify-content: start;
+    margin-block: 6rem;
     --gap: 1.5rem;
   }
 
   .crew-info {
     padding-inline: 0;
-    max-width: 37.5rem; /* Limit width of text content */
+    max-width: 37.5rem;
   }
 
   .crew-info .role {
@@ -182,6 +195,6 @@
 
   .crew-info .bio {
     font-size: var(--fs-400);
-    margin-inline: 0; /* Remove auto margin for left alignment */
+    margin-inline: 0;
   }
 }

@@ -1,7 +1,7 @@
-// src/pages/Home.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css'; // Keep this CSS file for Home-specific styles
+import './Home.css';
 
 const HomePage: React.FC = () => {
   return (

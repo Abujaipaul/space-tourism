@@ -1,23 +1,22 @@
-/* src/pages/Destination.css */
 
 .grid-container--destination {
-  padding-bottom: 4rem; /* Adjust general padding for the page */
+  padding-bottom: 4rem; 
 }
 
 .numbered-title {
-  justify-self: center; /* Center for mobile */
+  justify-self: center;
 }
 
 .destination-image {
-  max-width: 170px; /* Mobile image size */
-  margin-block: 2rem; /* Spacing for mobile */
+  max-width: 170px;
+  margin-block: 2rem;
   justify-self: center;
 }
 
 .tab-list {
-  --gap: 1.5rem; /* Space between tabs */
-  order: 1; /* Order for mobile layout */
-  justify-content: center; /* Center tabs for mobile */
+  --gap: 1.5rem;
+  order: 1;
+  justify-content: center;
 }
 
 .tab-list button {
@@ -42,8 +41,8 @@
 }
 
 .destination-info {
-  text-align: center; /* Center text for mobile */
-  border-bottom: 1px solid hsl(231, 15%, 26%); /* Separator line */
+  text-align: center;
+  border-bottom: 1px solid hsl(231, 15%, 26%);
   padding-bottom: 2rem;
   margin-bottom: 2rem;
 }
@@ -56,12 +55,12 @@
 .destination-info p {
   line-height: 1.8;
   max-width: 50ch;
-  margin-inline: auto; /* Center description for mobile */
+  margin-inline: auto;
 }
 
 .destination-meta {
-  flex-direction: column; /* Stack for mobile */
-  gap: 2rem; /* Space between distance and travel time */
+  flex-direction: column;
+  gap: 2rem;
   margin-top: 2rem;
 }
 
@@ -80,17 +79,17 @@
 @media (min-width: 35em) {
   .numbered-title {
     justify-self: start;
-    margin-left: 2.375rem; /* Align with design */
+    margin-left: 2.375rem;
   }
 
   .destination-image {
     max-width: 300px;
-    margin-block-start: 3.75rem; /* Adjust spacing */
+    margin-block-start: 3.75rem;
   }
 
   .tab-list {
     --gap: 2.25rem;
-    order: unset; /* Revert order */
+    order: unset;
   }
 
   .destination-info h3 {
@@ -98,8 +97,11 @@
   }
 
   .destination-meta {
-    flex-direction: row; /* Side-by-side for tablet */
-    justify-content: space-around; /* Distribute items */
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .grid-container--destination {
+    padding-bottom: 4rem; 
   }
 }
 
@@ -111,54 +113,54 @@
       ". title title ."
       ". image tabs-and-info ."
       / 1fr minmax(0, 30rem) minmax(0, 30rem) 1fr;
-    justify-items: start; /* Align content to start of their areas */
+    justify-items: start;
     text-align: left;
     height: 100vh;
-    padding-bottom: 0;
+    padding-bottom: 0; 
   }
 
   .numbered-title {
     grid-area: title;
     justify-self: start;
     align-self: end;
-    margin-left: 10.5%; /* Match design alignment */
+    margin-left: 10.5%;
   }
 
   .destination-image {
     grid-area: image;
-    max-width: 445px; /* Desktop image size */
+    max-width: 445px;
     margin-block-start: 6rem;
     margin-inline: 0;
-    justify-self: center; /* Center within its grid area */
+    justify-self: center;
   }
 
   .tab-list {
-    grid-area: tabs-and-info; /* Place tabs with info section */
+    grid-area: tabs-and-info;
     justify-self: start;
-    justify-content: start; /* Align tabs to the start */
+    justify-content: start;
     --gap: 2.25rem;
     margin-top: 5rem;
   }
 
   .destination-info {
-    grid-area: tabs-and-info; /* Place info with tabs section */
+    grid-area: tabs-and-info;
     text-align: left;
-    padding-left: 1rem; /* Adjust as needed for alignment */
-    border-bottom: 0; /* No border on desktop */
+    padding-left: 1rem;
+    border-bottom: 0;
     padding-bottom: 0;
     margin-bottom: 0;
-    align-self: start; /* Align to the top of its grid area */
-    margin-top: 10.5rem; /* Adjust top margin to align with image */
+    align-self: start;
+    margin-top: 10.5rem;
   }
 
   .destination-info p {
-    margin-inline: 0; /* Remove auto margin */
-    font-size: var(--fs-400); /* Ensure correct font size */
+    margin-inline: 0;
+    font-size: var(--fs-400);
   }
 
   .destination-meta {
-    justify-content: start; /* Align items to the start */
-    gap: 5rem; /* More space between items */
+    justify-content: start;
+    gap: 5rem;
     margin-top: 3.5rem;
   }
 }

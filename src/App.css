@@ -24,6 +24,11 @@
   --ff-serif: "Bellefair", serif;
   --ff-sans-cond: "Barlow Condensed", sans-serif;
   --ff-sans-normal: "Barlow", sans-serif;
+
+  /* Header height variable */
+  --header-height-mobile: 6rem;
+  --header-height-tablet: 6rem;
+  --header-height-desktop: 8.5rem;
 }
 
 /* CSS Reset (Modern CSS Reset from Andy Bell or similar) */
@@ -47,12 +52,12 @@ body {
   background-color: var(--clr-dark);
 
   /* Default Home page background - mobile first */
-  background-image: url('../assets/home/background-home-mobile.jpg');
+  background-image: url('./assets/home/background-home-mobile.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  transition: background-image 0.3s ease-in-out; /* Smooth transition for background changes */
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  transition: background-image 0.3s ease-in-out;
+  overflow-x: hidden;
 }
 
 /* Images */
@@ -85,10 +90,10 @@ input, button, textarea, select {
 
 .grid-container {
   display: grid;
-  place-items: center; /* Centers content vertically and horizontally in the grid area */
-  padding-inline: 1.5rem; /* Default padding for all pages */
-  min-height: calc(100vh - 6rem); /* Adjust based on header height, approx 6rem for default */
-  padding-top: 6rem; /* Push content down below the fixed header */
+  place-items: center;
+  padding-inline: 1.5rem;
+  padding-top: var(--header-height-mobile); /* Default content push-down */
+  min-height: calc(100vh - var(--header-height-mobile));
 }
 
 .flow > *:where(:not(:first-child)) {
@@ -117,7 +122,7 @@ input, button, textarea, select {
 .ff-sans-cond { font-family: var(--ff-sans-cond); }
 .ff-sans-normal { font-family: var(--ff-sans-normal); }
 
-/* font-sizes */
+/* font-size utility classes */
 .fs-900 { font-size: var(--fs-900); }
 .fs-800 { font-size: var(--fs-800); }
 .fs-700 { font-size: var(--fs-700); }
@@ -134,9 +139,9 @@ input, button, textarea, select {
 
 .numbered-title {
   font-family: var(--ff-sans-cond);
-  font-size: var(--fs-200); /* Default to mobile size for numbered title */
+  font-size: var(--fs-200);
   text-transform: uppercase;
-  letter-spacing: 2.35px; /* Default for mobile */
+  letter-spacing: 2.35px;
 }
 
 .numbered-title span {
@@ -147,9 +152,9 @@ input, button, textarea, select {
 
 /* Other utility classes */
 .uppercase { text-transform: uppercase; }
-.letter-spacing-1 { letter-spacing: 4.72px; } /* For "TRAVEL TO SPACE" */
-.letter-spacing-2 { letter-spacing: 2.7px; }  /* For nav links, crew roles */
-.letter-spacing-3 { letter-spacing: 2.35px; } /* For small text like "Avg. distance" */
+.letter-spacing-1 { letter-spacing: 4.72px; }
+.letter-spacing-2 { letter-spacing: 2.7px; }
+.letter-spacing-3 { letter-spacing: 2.35px; }
 .d-block { display: block; }
 
 
@@ -158,18 +163,57 @@ input, button, textarea, select {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 1.5rem 1.5rem 2rem; /* Top, Right, Bottom, Left */
+  padding: 1.5rem 1.5rem 1.5rem 2rem;
   background-color: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);
-  position: fixed; /* Fixed header */
+  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 100;
+  height: var(--header-height-mobile);
 }
 
-.main-header .logo img {
-  height: 40px;
+/* Mobile Nav Toggle Button */
+.mobile-nav-toggle {
+  display: block; /* Show on mobile */
+  position: absolute;
+  z-index: 200;
+  right: 1.5rem;
+  top: 2rem;
+  background: transparent;
+  width: 1.5rem; /* Explicit size for button to contain SVG */
+  height: 1.5rem;
+  border: 0;
+  cursor: pointer;
+  padding: 0; /* Remove default button padding */
+  display: flex; /* Flex container to center SVG */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styles for SVG directly inside the button */
+.mobile-nav-toggle svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--clr-light); /* Example: color the SVG icon */
+}
+
+
+.main-nav {
+  /* Mobile navigation styles */
+  position: fixed;
+  z-index: 150;
+  inset: 0 0 0 30%; /* Start from 30% of screen width */
+  padding: min(20rem, 10vh) 2rem; /* Top padding, horizontal padding */
+  background-color: hsl(230, 35%, 7%); /* Darker, slightly opaque background */
+  backdrop-filter: blur(2rem); /* Stronger blur for better separation */
+  transform: translateX(100%); /* Initially off-screen */
+  transition: transform 0.3s ease-out;
+}
+
+.main-nav[data-visible="true"] {
+  transform: translateX(0%); /* Slide in */
 }
 
 .main-nav ul {
@@ -177,111 +221,137 @@ input, button, textarea, select {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 2rem; /* Spacing between navigation items */
+  flex-direction: column; /* Stack vertically for mobile */
+  gap: 2rem;
 }
 
 .main-nav a {
   text-decoration: none;
   color: var(--clr-white);
-  font-size: var(--fs-300); /* Adjusted to a suitable font size */
+  font-size: var(--fs-400); /* Larger font for mobile menu */
   font-family: var(--ff-sans-cond);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-2);
-  padding-bottom: 0.75rem; /* For active indicator line */
-  border-bottom: 3px solid transparent; /* Default transparent border */
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid transparent; /* Not explicitly visible on mobile, but keep for consistency */
   transition: border-color 0.3s ease;
 }
 
 .main-nav a span {
   font-weight: bold;
   margin-right: 0.5rem;
-  opacity: 0.75; /* To match design */
+  opacity: 0.75;
   transition: opacity 0.3s ease;
 }
 
 .main-nav a:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.5); /* Hover effect */
+  border-bottom-color: transparent; /* No underline on hover for mobile */
 }
 .main-nav a:hover span {
-  opacity: 1; /* Make number solid on hover */
+  opacity: 1;
 }
-
 
 .main-nav a.active {
-  border-bottom-color: var(--clr-white); /* Active page indicator */
+  border-bottom-color: transparent; /* No underline for active on mobile */
 }
 .main-nav a.active span {
-  opacity: 1; /* Active number is solid */
+  opacity: 1;
 }
 
 /* Background Images - Media Queries */
 @media (min-width: 35em) { /* Tablet */
   body {
-    background-image: url('../assets/home/background-home-tablet.jpg');
+    background-image: url('./assets/home/background-home-tablet.jpg');
   }
 
-  /* Specific background for Destination page on tablet */
   body.destination-background {
-    background-image: url('../assets/destination/background-destination-tablet.jpg');
+    background-image: url('./assets/destination/background-destination-tablet.jpg');
   }
 
-  /* Specific background for Crew page on tablet */
   body.crew-background {
-    background-image: url('../assets/crew/background-crew-tablet.jpg');
+    background-image: url('./assets/crew/background-crew-tablet.jpg');
+  }
+
+  body.technology-background {
+    background-image: url('./assets/technology/background-technology-tablet.jpg');
+  }
+
+  /* Adjust grid-container padding for tablet to clear header */
+  .grid-container {
+    padding-top: var(--header-height-tablet);
+    min-height: calc(100vh - var(--header-height-tablet));
   }
 
   .main-header {
-    padding: 0 0 0 2rem; /* No padding on right, nav takes care of it */
+    padding: 0 0 0 2rem;
+    height: var(--header-height-tablet);
   }
   .main-header .logo {
-    margin-right: 3rem; /* Space between logo and nav */
+    margin-right: 3rem;
   }
+
+  .mobile-nav-toggle {
+    display: none; /* Hide hamburger on tablet */
+  }
+
   .main-nav {
-    padding-inline: 4rem; /* Padding for the nav itself */
-    padding-block: 1.5rem;
+    position: relative; /* Unset fixed for tablet */
+    inset: unset;
+    padding: 0; /* Reset padding */
+    transform: translateX(0%); /* Always visible */
+    background-color: rgba(255, 255, 255, 0.04); /* Restore background for tablet nav */
+    backdrop-filter: blur(10px); /* Lighter blur for tablet nav */
   }
+
   .main-nav ul {
+    flex-direction: row; /* Horizontal for tablet */
     gap: 2.25rem;
   }
+
   .main-nav a {
     font-size: var(--fs-300);
-    letter-spacing: var(--letter-spacing-3); /* Adjusted for tablet */
+    letter-spacing: var(--letter-spacing-3);
+    border-bottom: 3px solid transparent; /* Restore for tablet */
   }
+  .main-nav a:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.5); /* Restore hover */
+  }
+  .main-nav a.active {
+    border-bottom-color: var(--clr-white); /* Restore active */
+  }
+
   .numbered-title {
-    font-size: var(--fs-400); /* Larger for tablet */
+    font-size: var(--fs-400);
     letter-spacing: 3.38px;
   }
 }
 
 @media (min-width: 45em) { /* Desktop */
   body {
-    background-image: url('../assets/home/background-home-desktop.jpg');
+    background-image: url('./assets/home/background-home-desktop.jpg');
   }
 
-  /* Specific background for Destination page on desktop */
   body.destination-background {
-    background-image: url('../assets/destination/background-destination-desktop.jpg');
+    background-image: url('./assets/destination/background-destination-desktop.jpg');
   }
 
-  /* Specific background for Crew page on desktop */
   body.crew-background {
-    background-image: url('../assets/crew/background-crew-desktop.jpg');
+    background-image: url('./assets/crew/background-crew-desktop.jpg');
+  }
+
+  body.technology-background {
+    background-image: url('./assets/technology/background-technology-desktop.jpg');
   }
 
   .grid-container {
-    grid-template-areas:
-      ". title title ."
-      ". image tabs-and-info ."
-      / 1fr minmax(0, 30rem) minmax(0, 30rem) 1fr; /* Default 4-column layout for some pages */
-    align-items: end;
-    text-align: left;
-    height: 100vh; /* Full viewport height on desktop */
-    padding-top: 0;
-    padding-bottom: 8rem;
+    padding-top: var(--header-height-desktop);
+    min-height: calc(100vh - var(--header-height-desktop));
+    padding-bottom: 0;
   }
 
   .main-header {
     padding-top: 2.5rem;
+    height: var(--header-height-desktop);
   }
 
   .main-header .logo {
@@ -289,7 +359,7 @@ input, button, textarea, select {
   }
 
   .main-nav {
-    padding-right: 8rem; /* More padding on the right for desktop */
+    padding-right: 8rem;
   }
 
   .main-nav ul {
@@ -297,12 +367,22 @@ input, button, textarea, select {
   }
 
   .main-nav a {
-    font-size: var(--fs-200); /* Smaller nav font size as per design */
-    letter-spacing: var(--letter-spacing-2); /* Adjusted for desktop */
+    font-size: var(--fs-200);
+    letter-spacing: var(--letter-spacing-2);
   }
   .numbered-title {
-    font-size: var(--fs-500); /* Largest for desktop */
+    font-size: var(--fs-500);
     letter-spacing: 4.72px;
   }
 }
 
+.home-page {
+  padding-bottom: 8rem;
+}
+
+.grid-container--destination {
+  padding-bottom: 4rem;
+}
+.grid-container--crew {
+  padding-bottom: 4rem;
+}

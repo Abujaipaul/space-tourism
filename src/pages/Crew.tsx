@@ -1,7 +1,20 @@
-// src/pages/Crew.tsx
+
 import React, { useState, useEffect } from 'react';
 import data from '../data/data.json';
 import './Crew.css';
+
+// Helper function to dynamically import images for crew
+const getCrewImageSrc = (imageFileName: string, type: 'png' | 'webp') => {
+  try {
+    const images = import.meta.glob('../assets/crew/*.{png,webp}', { eager: true, as: 'url' });
+    const fullPath = `../assets/crew/${imageFileName}`;
+    return images[fullPath] || '';
+  } catch (error) {
+    console.error(`Failed to load crew image ${imageFileName}:`, error);
+    return '';
+  }
+};
+
 
 const CrewPage: React.FC = () => {
   const [selectedCrewIndex, setSelectedCrewIndex] = useState(0);
@@ -16,6 +29,10 @@ const CrewPage: React.FC = () => {
     };
   }, []);
 
+  // Dynamically get image URL
+  const pngSrc = getCrewImageSrc(currentCrewMember.images.png, 'png');
+
+
   return (
     <section className="crew-page flow grid-container--crew">
       <h2 className="numbered-title fs-500 ff-sans-cond uppercase text-white">
@@ -23,8 +40,8 @@ const CrewPage: React.FC = () => {
       </h2>
 
       <div className="crew-image-container">
-        <img src={currentCrewMember.images.png} alt={currentCrewMember.name} className="crew-image" />
-        <div className="image-separator"></div> {/* Horizontal line for mobile/tablet */}
+        <img src={pngSrc} alt={currentCrewMember.name} className="crew-image" /> 
+        <div className="image-separator"></div>
       </div>
 
 
