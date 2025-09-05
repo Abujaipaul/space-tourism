@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import data from '../data/data.json';
 import './Technology.css';
 
-// Helper function to dynamically import technology images
-const getTechnologyImageSrc = (imageFileName: string, type: 'portrait' | 'landscape') => {
+
+const getTechnologyImageSrc = (imageFileName: string) => {
   try {
-    // Glob for both portrait and landscape, covering jpg
+    // Glob pattern to match all jpg images in the technology assets folder
     const images = import.meta.glob('../assets/technology/*.jpg', { eager: true, as: 'url' });
     const fullPath = `../assets/technology/${imageFileName}`;
-    return images[fullPath] || '';
+    return images[fullPath] || ''; // Return the URL or empty string if not found
   } catch (error) {
     console.error(`Failed to load technology image ${imageFileName}:`, error);
     return '';
@@ -31,8 +31,8 @@ const TechnologyPage: React.FC = () => {
   }, []);
 
   // Dynamically get image URLs for portrait and landscape
-  const portraitSrc = getTechnologyImageSrc(currentTech.images.portrait, 'portrait');
-  const landscapeSrc = getTechnologyImageSrc(currentTech.images.landscape, 'landscape');
+  const portraitSrc = getTechnologyImageSrc(currentTech.images.portrait);
+  const landscapeSrc = getTechnologyImageSrc(currentTech.images.landscape);
 
 
   return (

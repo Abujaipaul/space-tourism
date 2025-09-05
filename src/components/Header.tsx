@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import logoSvg from '../assets/shared/logo.svg';
+
 import iconHamburgerUrl from '../assets/shared/icon-hamburger.svg';
 import iconCloseUrl from '../assets/shared/icon-close.svg';
 

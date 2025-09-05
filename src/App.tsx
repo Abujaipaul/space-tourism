@@ -7,7 +7,7 @@ import DestinationPage from './pages/Destination';
 import CrewPage from './pages/Crew';
 import TechnologyPage from './pages/Technology'; 
 
-import './App.css'; // Main App styles
+import './App.css';
 
 function App() {
   console.log(data);

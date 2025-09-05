@@ -2,19 +2,18 @@
 .home-page {
   display: grid;
   text-align: center;
-  align-content: end;
+  align-content: center; 
   justify-items: center;
   padding-bottom: 5rem;
   width: 100%; 
-
 }
 
-/* Explicitly give inner content elements a max-width and center them */
+/* give inner content elements a max-width and center them */
 .home-content, .explore-button {
   max-width: 50ch; 
   margin-inline: auto; 
-  text-align: center;
-  padding-inline: 0px;
+  text-align: center; 
+  padding-inline: 0; 
 }
 
 .home-content h1 span {
@@ -71,22 +70,24 @@
   .home-page {
     padding-block-start: 6.25rem;
     padding-bottom: 5rem;
+    width: unset; 
   }
   .home-content, .explore-button {
-    max-width: unset;
-    padding-inline: 0; 
+    max-width: unset; 
+    padding-inline: 0;
   }
   .home-content p {
-    font-size: 1.1rem;
+    font-size: var(--fs-400); 
   }
 }
 
 @media (min-width: 45em) { /* Desktop */
   .home-page {
     grid-area: title;
-    align-content: end;
+    align-content: end; 
     text-align: left;
     padding-bottom: 8rem;
+    width: unset;
   }
 
   .home-content, .explore-button {
@@ -111,6 +112,6 @@
   }
 
   .large-button {
-    font-size: 2rem;
+    font-size: var(--fs-600); 
   }
 }

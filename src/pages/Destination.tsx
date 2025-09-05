@@ -3,15 +3,12 @@ import React, { useState, useEffect } from 'react';
 import data from '../data/data.json';
 import './Destination.css';
 
-// Helper function to dynamically import images for destinations
-// This tells Vite to process these images and provide a URL
-const getDestinationImageSrc = (imageFileName: string, type: 'png' | 'webp') => {
+
+const getDestinationImageSrc = (imageFileName: string) => {
   try {
-    // Vite's import.meta.glob is powerful for dynamic imports
-    // It will return an object like {'./image-moon.png': () => import('/src/assets/destination/image-moon.png')}
     const images = import.meta.glob('../assets/destination/*.{png,webp}', { eager: true, as: 'url' });
     const fullPath = `../assets/destination/${imageFileName}`;
-    return images[fullPath] || ''; // Return the URL or empty string if not found
+    return images[fullPath] || '';
   } catch (error) {
     console.error(`Failed to load destination image ${imageFileName}:`, error);
     return '';
@@ -33,8 +30,8 @@ const DestinationPage: React.FC = () => {
   }, []);
 
   // Dynamically get image URLs
-  const pngSrc = getDestinationImageSrc(currentDestination.images.png, 'png');
-  const webpSrc = getDestinationImageSrc(currentDestination.images.webp, 'webp');
+  const pngSrc = getDestinationImageSrc(currentDestination.images.png); 
+  const webpSrc = getDestinationImageSrc(currentDestination.images.webp); 
 
 
   return (

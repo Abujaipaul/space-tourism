@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import data from '../data/data.json';
 import './Crew.css';
 
-// Helper function to dynamically import images for crew
-const getCrewImageSrc = (imageFileName: string, type: 'png' | 'webp') => {
+
+const getCrewImageSrc = (imageFileName: string) => {
   try {
+    // Glob pattern to match both png and webp in the crew assets folder
     const images = import.meta.glob('../assets/crew/*.{png,webp}', { eager: true, as: 'url' });
     const fullPath = `../assets/crew/${imageFileName}`;
-    return images[fullPath] || '';
+    return images[fullPath] || ''; // Return the URL or empty string if not found
   } catch (error) {
     console.error(`Failed to load crew image ${imageFileName}:`, error);
     return '';
@@ -30,7 +31,7 @@ const CrewPage: React.FC = () => {
   }, []);
 
   // Dynamically get image URL
-  const pngSrc = getCrewImageSrc(currentCrewMember.images.png, 'png');
+  const pngSrc = getCrewImageSrc(currentCrewMember.images.png);
 
 
   return (
@@ -40,7 +41,7 @@ const CrewPage: React.FC = () => {
       </h2>
 
       <div className="crew-image-container">
-        <img src={pngSrc} alt={currentCrewMember.name} className="crew-image" /> 
+        <img src={pngSrc} alt={currentCrewMember.name} className="crew-image" />
         <div className="image-separator"></div>
       </div>
 

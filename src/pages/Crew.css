@@ -17,7 +17,7 @@
   grid-area: title;
   justify-self: center;
   margin-top: 1.5rem;
-  width: 100%; /* Take full width for centering */
+  width: 100%; 
 }
 
 .crew-image-container {
